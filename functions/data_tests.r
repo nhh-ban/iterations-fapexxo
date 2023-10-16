@@ -5,6 +5,8 @@
 # All tests are packed in a function test_stations_metadata that apples
 # all the aforementioned tests
 
+
+# evaluate correctness of column names
 test_stations_metadata_colnames <-
   function(df) {
     
@@ -17,6 +19,7 @@ test_stations_metadata_colnames <-
     }
   }
 
+# evaluate if row size is ordinary
 test_stations_metadata_nrows <-
   function(df) {
     
@@ -32,6 +35,8 @@ test_stations_metadata_nrows <-
     }
   }
 
+
+# check data type of variables
 test_stations_metadata_coltypes <-
   function(df) {
     expected_coltypes <-
@@ -45,6 +50,8 @@ test_stations_metadata_coltypes <-
     }
   }
   
+
+# evaluate amount of NAs
 test_stations_metadata_nmissing <-
   function(df) {
     max_miss_vals <- 200
@@ -56,6 +63,7 @@ test_stations_metadata_nmissing <-
     }
   }
 
+# check for correct timezone
 test_stations_metadata_latestdata_timezone <-
   function(df) {
     
@@ -67,6 +75,7 @@ test_stations_metadata_latestdata_timezone <-
   }
 
 
+# aggregate functions in one
 test_stations_metadata <- 
   function(df){
     test_stations_metadata_colnames(df)
