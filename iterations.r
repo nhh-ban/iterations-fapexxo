@@ -50,9 +50,14 @@ test_stations_metadata(stations_metadata_df)
 
 source("gql-queries/vol_qry.r")
 
-stations_metadata_df %>% 
+random_traffic_station <- 
+    stations_metadata_df %>% 
   filter(latestData > Sys.Date() - days(7)) %>% 
-  sample_n(1) %$% 
+  sample_n(1) 
+
+name <- random_traffic_station$name
+
+random_traffic_station %$% 
   vol_qry(
     id = id,
     from = to_iso8601(latestData, -4),
@@ -60,9 +65,13 @@ stations_metadata_df %>%
   ) %>% 
   GQL(., .url = configs$vegvesen_url) %>%
   transform_volumes() %>% 
-  ggplot(aes(x=from, y=volume)) + 
-  geom_line() + 
-  theme_classic()
+  ggplot(aes(x=from, y=volume)) +
+    geom_line() +
+    theme_classic() +
+  ggtitle(str_glue("Traffic in the last 7 days in {name}"))
+
+
+
 
 
 
